@@ -1,28 +1,42 @@
 async function callAPI(url:string)
 {
-  const myHeaders: Headers = new Headers();
-  myHeaders.append('Content-Type', 'application/json');
-  myHeaders.append('Access-Control-Allow-Origin', '*');
-  myHeaders.append('Access-Control-Expose-Headers', '*'); 
-  myHeaders.append('Access-Control-Allow-Headers', '*'); 
-  myHeaders.append('Access-Control-Allow-Methods', '*'); 
+//   const myHeaders: Headers = new Headers();
+//   myHeaders.append('Content-Type', 'application/json');
+//   myHeaders.append('Access-Control-Allow-Origin', '*');
+//   myHeaders.append('Access-Control-Expose-Headers', '*'); 
+//   myHeaders.append('Access-Control-Allow-Headers', '*'); 
+//   myHeaders.append('Access-Control-Allow-Methods', '*'); 
 
-  const requestOptions: RequestInit = {
-            method: "POST",
-            headers: myHeaders,
-            redirect: 'follow',
-            mode: 'cors',
-        };
+//   const requestOptions: RequestInit = {
+//             method: "POST",
+//             headers: myHeaders,
+//             redirect: 'follow',
+//             mode: 'cors',
+//         };
 
-const response = await fetch(url, requestOptions)
-        .then((response) => {
-          if (response.status === 200) {
-            return response.json();
-          } else {
-              throw new Error("Something went wrong on API server!");
-          }
-        });
-        return response;
+// const response = await fetch(url, requestOptions)
+//         .then((response) => {
+//           if (response.status === 200) {
+//             return response.json();
+//           } else {
+//               throw new Error("Something went wrong on API server!");
+//           }
+//         });
+//         return response;
+
+const response = await fetch(url, {
+  method: 'POST',
+  headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} });
+if (!response.ok) {  console.log("response",response)}else{console.log("error",response)}
+return response;
+// If you care about a response:
+// if (response.body !== null) {
+//   // body is ReadableStream<Uint8Array>
+//   // parse as needed, e.g. reading directly, or
+//   const asString = new TextDecoder("utf-8").decode(response.body);
+//   // and further:
+//   const asJSON = JSON.parse(asString);  // implicitly 'any', make sure to verify type on runtime.
+// }
 }
 
 export default async function jebbitIntigration():Promise<returnValue> {
