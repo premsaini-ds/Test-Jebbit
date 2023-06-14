@@ -1,6 +1,7 @@
 async function callAPI(url:string)
 {
   const myHeaders: Headers = new Headers();
+  myHeaders.append('Content-Type', 'application/json');
   myHeaders.append('Access-Control-Allow-Origin', '*');
   myHeaders.append('Access-Control-Expose-Headers', '*'); 
   myHeaders.append('Access-Control-Allow-Headers', '*'); 
@@ -25,16 +26,21 @@ const response = await fetch(url, requestOptions)
 }
 
 export default async function jebbitIntigration():Promise<returnValue> {
-
-              const hitapisUrl = await callAPI("http://yextproducts.24livehost.com/pub/livenation/logserver.php");
-              // const apiData = JSON.stringify(hitapisUrl);
-              // console.log("date",hitapisUrl);
-
-                return {
-                  body: "Calling API",
-                  headers: {},
-                  statusCode: 200
-                };
+              try {
+                      const hitapisUrl = await callAPI("http://yextproducts.24livehost.com/pub/livenation/logserver.php");
+                        // const apiData = JSON.stringify(hitapisUrl);
+                        // console.log("date",hitapisUrl);
+                      return {
+                        body: "Calling API",
+                        headers: {},
+                        statusCode: 200
+                      };
+                  }
+  catch (error) {
+                console.error('Failed to fetch product API:', error);
+                throw error;
+              }
+             
 }
 
 
