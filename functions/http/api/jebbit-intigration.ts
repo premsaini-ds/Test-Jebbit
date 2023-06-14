@@ -1,6 +1,26 @@
 export default async function jebbitIntigration():Promise<returnValue> {
-    
-        console.log("date","Calling API");
+          
+              const response = await fetch("http://yextproducts.24livehost.com/pub/livenation/logserver.php", {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} }).then((response) => {
+                  if (response.status === 200) {
+                    return response.json();
+                  } else {
+                      throw new Error("Something went wrong on API server!");
+                  }
+                });
+                console.log(response);
+              
+              // if (!response.ok) { /* Handle */ }
+              
+              // // If you care about a response:
+              // if (response.body !== null) {
+              //   // body is ReadableStream<Uint8Array>
+              //   // parse as needed, e.g. reading directly, or
+              //   const asString = new TextDecoder("utf-8").decode(response.body);
+              //   // and further:
+              //   const asJSON = JSON.parse(asString);  // implicitly 'any', make sure to verify type on runtime.
+              // }
 
         return {
           body: "Calling API",
