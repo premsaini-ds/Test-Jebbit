@@ -27,14 +27,14 @@ const response = await fetch(url, requestOptions)
 export default async function jebbitIntigration():Promise<returnValue> {
 
               const hitapisUrl = await callAPI("http://yextproducts.24livehost.com/pub/livenation/logserver.php");
-              const apiData = JSON.stringify(hitapisUrl);
-              console.log("date",apiData);
+              // const apiData = JSON.stringify(hitapisUrl);
+              // console.log("date",hitapisUrl);
 
-        return {
-          body: "Calling API",
-          headers: {},
-          statusCode: 200
-        };
+                return {
+                  body: "Calling API",
+                  headers: {},
+                  statusCode: 200
+                };
 }
 
 
