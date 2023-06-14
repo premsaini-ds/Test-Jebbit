@@ -40,18 +40,14 @@ export const getHeadConfig: GetHeadConfig<
     ],
   };
 };
-
 const FourOhFour: Template<TemplateRenderProps> = () => {
   return (
     <>
-      <PageLayout>
-        <Banner name={"404 - Page not found"} />
         <div className="centered-container">
           <div className="flex justify-center items-center text-2xl bg-gray-200 h-60 rounded-md shadow-md">
             <h1>404 Not Found</h1>
           </div>
         </div>
-      </PageLayout>
     </>
   );
 };
