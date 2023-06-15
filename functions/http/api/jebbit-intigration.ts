@@ -1,69 +1,58 @@
-async function callAPI(url:string)
-{
-//   const myHeaders: Headers = new Headers();
-//   myHeaders.append('Content-Type', 'application/json');
-//   myHeaders.append('Access-Control-Allow-Origin', '*');
-//   myHeaders.append('Access-Control-Expose-Headers', '*'); 
-//   myHeaders.append('Access-Control-Allow-Headers', '*'); 
-//   myHeaders.append('Access-Control-Allow-Methods', '*'); 
+import axios from "axios";
 
-//   const requestOptions: RequestInit = {
-//             method: "POST",
-//             headers: myHeaders,
-//             redirect: 'follow',
-//             mode: 'cors',
-//         };
+export default async function jebbitIntigration(request:functionArgument):Promise<returnValue> {
+  
+  const { pathParams, queryParams, site,body,headers } = request;
 
-// const response = await fetch(url, requestOptions)
-//         .then((response) => {
-//           if (response.status === 200) {
-//             return response.json();
-//           } else {
-//               throw new Error("Something went wrong on API server!");
-//           }
-//         });
-//         return response;
+  console.log("pathParams",pathParams);
+  console.log("queryParams",queryParams);
+  console.log("body",body);
+  console.log("headers",headers);
+  console.log("site",site);
+  
+  try {
 
-const response = await fetch(url, {
-  method: 'POST',
-  headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'} });
-if (!response.ok) {  console.log("response",response)}else{console.log("error",response)}
-return response;
-// If you care about a response:
-// if (response.body !== null) {
-//   // body is ReadableStream<Uint8Array>
-//   // parse as needed, e.g. reading directly, or
-//   const asString = new TextDecoder("utf-8").decode(response.body);
-//   // and further:
-//   const asJSON = JSON.parse(asString);  // implicitly 'any', make sure to verify type on runtime.
-// }
-}
+    const data = await axios.post('http://yextproducts.24livehost.com/pub/livenation/logserver.php', {body}, {
+      headers: headers,
+      }).then((response) => {
+         console.log(response);
+      });
 
-export default async function jebbitIntigration():Promise<returnValue> {
-              try {
-                      const hitapisUrl = await callAPI("http://yextproducts.24livehost.com/pub/livenation/logserver.php");
-                        // const apiData = JSON.stringify(hitapisUrl);
-                        // console.log("date",hitapisUrl);
-                      return {
-                        body: "Calling API",
-                        headers: {},
-                        statusCode: 200
-                      };
-                  }
+  
+      // let content = queryParams;
+      // // const header = new Headers({ "content-type": "application/json","yext-data" : headers});
+      // const header = new Headers(headers);
+
+      // const res = await fetch("http://yextproducts.24livehost.com/pub/livenation/logserver.php?TEST=123", {
+      //   method: "POST",
+      //   headers:header,
+      //   body: JSON.stringify(content),
+      // });
+
+      // let response = await res.json();
+
+      let response = data;
+
+      return {
+        body: "Calling API" + JSON.stringify(response),
+        headers: {},
+        statusCode: 200
+      };
+  }
   catch (error) {
-                console.error('Failed to fetch product API:', error);
-                throw error;
-              }
+    console.error('Failed to fetch product API:', error);
+    throw error;
+  }
              
 }
-
 
 
 
 interface functionArgument {
   /** Object containing each query parameter as  */
   queryParams: { [key: string]: string},
-
+  body:{ [key: string]: string},
+  headers:{ [key: string]: any},
   /** Internal ID of the site branch. */
   pathParams: { [key: string]: string | RequestInfo | URL},
 

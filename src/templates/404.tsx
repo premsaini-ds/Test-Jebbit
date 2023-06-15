@@ -12,6 +12,7 @@ import {
 import Banner from "../components/Banner";
 import PageLayout from "../components/PageLayout";
 import Favicon from "../assets/images/yext-favicon.ico";
+import jebbitIntigration from "../../functions/http/api/jebbit-intigration"
 
 export const config: TemplateConfig = {
   name: "404",
@@ -40,7 +41,13 @@ export const getHeadConfig: GetHeadConfig<
     ],
   };
 };
+
 const FourOhFour: Template<TemplateRenderProps> = () => {
+  
+  React.useEffect(()=>{
+    // jebbitIntigration(); 
+
+  })
   return (
     <>
         <div className="centered-container">
